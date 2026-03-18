@@ -1,0 +1,23 @@
+{
+  "sqltools.connections": [
+    {
+      "name": "Docker PostgreSQL",
+      "driver": "PostgreSQL",
+      "server": "172.31.237.135",
+      "port": 5432,
+      "database": "postgres",
+      "username": "postgres"
+    },
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Docker PostgreSQL",
+      "database": "postgres",
+      "username": "postgres",
+      "password": "postgres"
+    }
+  ]
+}
