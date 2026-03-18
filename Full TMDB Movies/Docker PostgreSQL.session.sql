@@ -1,4 +1,6 @@
-SELECT status, COUNT(*) AS total
-FROM movies
-GROUP BY status
-ORDER BY total DESC;
+SELECT title, revenue, budget,
+         (revenue - budget) AS profit
+  FROM movies
+  WHERE revenue > 0 AND budget > 0
+  ORDER BY revenue DESC
+  LIMIT 10;
