@@ -1,23 +1,24 @@
-# TMDB Movies SQL Analysis
+# TMDB Movies SQL Analysis 🎬
 
-A SQL analysis project using the TMDB movie dataset. The goal is to explore movie data and practice SQL queries — from basic filtering to advanced analytics.
+A SQL analysis project using the TMDB movie dataset. The goal is to 
+explore movie data and practice SQL queries — from basic filtering 
+to advanced analytics.
 
-## Dataset
-
+## 📁 Dataset
 - **Source:** TMDB Movie Dataset v11
 - **File:** `Full TMDB Movies/TMDB_movie_dataset_v11.csv`
-- **Columns:** title, genres, release_date, budget, revenue, vote_average, vote_count, popularity, runtime, original_language, production_countries, keywords, overview
+- **Columns:** title, genres, release_date, budget, revenue, 
+  vote_average, vote_count, popularity, runtime, original_language, 
+  production_countries, keywords, overview
 
-## Tools
-
+## 🛠️ Tools
 - **Database:** PostgreSQL (via Docker)
 - **Editor:** VS Code + SQLTools extension
 - **Environment:** WSL (Windows Subsystem for Linux)
 
-## Setup
+## ⚙️ Setup
 
 ### 1. Start PostgreSQL with Docker
-
 ```bash
 docker run --name movies-db \
   -e POSTGRES_PASSWORD=postgres \
@@ -26,7 +27,6 @@ docker run --name movies-db \
 ```
 
 ### 2. Connect in VS Code
-
 Use the SQLTools extension and connect with:
 - Host: `localhost`
 - Port: `5432`
@@ -35,10 +35,9 @@ Use the SQLTools extension and connect with:
 - Database: `postgres`
 
 ### 3. Run the queries
+Open `Full TMDB Movies/movie.sql` in VS Code and run any section.
 
-Open `Full TMDB Movies/movei.sql` in VS Code and run any section.
-
-## Analysis Sections
+## 📊 Analysis Sections
 
 | # | Section | SQL Concepts |
 |---|---------|-------------|
@@ -51,8 +50,7 @@ Open `Full TMDB Movies/movei.sql` in VS Code and run any section.
 | 7 | Text Search | `ILIKE`, `LENGTH`, pattern matching |
 | 8 | Advanced Analytics | CTEs, `PERCENT_RANK`, subqueries |
 
-## Key SQL Concepts Used
-
+## 🔑 Key SQL Concepts Used
 - `GROUP BY` + `HAVING` — group and filter aggregated data
 - `CASE WHEN` — conditional logic inside queries
 - `ROW_NUMBER()` — rank rows within groups
@@ -60,3 +58,12 @@ Open `Full TMDB Movies/movei.sql` in VS Code and run any section.
 - `WITH` (CTE) — reusable temporary result sets
 - `EXTRACT` — pull year/month from date columns
 - `ILIKE` — case-insensitive text search
+
+## 🔍 Key Insights
+- Identified top-rated movies with highest ROI
+- Analyzed revenue trends across genres and languages
+- Ranked movies by popularity using PERCENT_RANK()
+
+## 👤 Author
+Turki Alotaibi
+github.com/Vanturki
