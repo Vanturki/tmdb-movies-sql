@@ -1,0 +1,9 @@
+﻿# Raw dataset files (large)
+Full TMDB Movies/TMDB_movie_dataset_v11.csv
+Full TMDB Movies/TMDB_movie_dataset_v11_cleaned.csv
+
+# Python
+__pycache__/
+*.pyc
+.env
+
