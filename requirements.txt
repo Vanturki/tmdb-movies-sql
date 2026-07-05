@@ -1,0 +1,22 @@
+# Core data stack
+pandas>=2.0
+numpy>=1.24
+pyarrow>=14.0
+
+# Cleaning engine (streams the 587 MB CSV without loading it all into memory)
+duckdb>=0.10
+
+# Visualization
+matplotlib>=3.7
+seaborn>=0.12
+plotly>=5.18
+
+# Interactive dashboard
+streamlit>=1.30
+
+# Config + validation + testing
+PyYAML>=6.0
+pytest>=7.4
+
+# Optional: load cleaned data into PostgreSQL for the SQL layer
+psycopg2-binary>=2.9

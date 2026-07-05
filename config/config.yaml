@@ -1,0 +1,80 @@
+# ==========================================================================
+# Central configuration for the TMDB movies pipeline.
+# Every path, threshold and setting lives here so nothing is hardcoded in code.
+# Paths are relative to the project root (the folder containing this config/).
+# ==========================================================================
+
+project:
+  name: "TMDB Movies Analysis"
+  dataset: "TMDB Movie Dataset v11"
+
+paths:
+  raw_csv: "Full TMDB Movies/TMDB_movie_dataset_v11.csv"   # raw source (gitignored)
+  processed_parquet: "data/processed/movies_cleaned.parquet"  # cleaned output
+  figures_dir: "reports/figures"        # PNG charts
+  tables_dir: "reports/tables"          # CSV summary tables
+  report_html: "reports/report.html"    # final HTML report
+  log_file: "logs/pipeline.log"         # rotating pipeline log
+
+# --- Cleaning thresholds (used by src/clean.py) ---------------------------
+cleaning:
+  min_year: 1888                 # first film ever (Roundhay Garden Scene)
+  max_year_offset: 2             # allow up to current_year + this (announced films)
+  max_revenue: 3000000000        # 3B cap: no real film has grossed above ~2.92B (Avatar)
+  max_budget: 3000000000
+  max_runtime: 1000              # minutes; above this is a data error
+  spam_patterns:                 # case-insensitive regex fragments that mark junk titles
+    - "unsubscribe"
+    - "https?://"
+    - "www\\."
+    - "\\b\\d{3}[-.\\s]?\\d{3}[-.\\s]?\\d{4}\\b"   # phone numbers
+
+# --- Validation gates (used by src/validate.py) ---------------------------
+validation:
+  hard_fail: false               # true = raise on failure, false = log a warning and continue
+  min_raw_rows: 100000           # sanity floor for the raw file
+  min_clean_rows: 10000          # sanity floor after cleaning
+  rating_min: 0
+  rating_max: 10
+  required_columns:
+    - id
+    - title
+    - release_date
+    - revenue
+    - budget
+    - vote_average
+    - vote_count
+
+# --- Analysis settings (used by src/eda.py) -------------------------------
+analysis:
+  min_vote_count: 50             # minimum votes for a genre/runtime average to count as "reliable"
+  top_rated_min_votes: 1000      # higher bar for the "best movies" list (excludes niche titles)
+  financial_min_votes: 100       # credibility floor for revenue/ROI (junk entries have ~0 votes)
+  top_n: 10                      # rows in every "top N" table
+  genres:                        # genres tracked in genre breakdowns
+    - Action
+    - Comedy
+    - Drama
+    - Horror
+    - Romance
+    - Thriller
+    - Science Fiction
+    - Animation
+    - Documentary
+    - Adventure
+
+# --- Visualization theme (used by src/visualize.py) -----------------------
+viz:
+  style: "seaborn-v0_8-darkgrid"
+  palette: "viridis"
+  dpi: 120
+  figsize: [10, 6]
+
+# --- PostgreSQL connection (used by the optional SQL-loading step) ---------
+# The password is NOT stored here. Set it in the env var MOVIES_DB_PASSWORD.
+database:
+  host: "localhost"
+  port: 5432
+  dbname: "postgres"
+  user: "postgres"
+  table: "movies"

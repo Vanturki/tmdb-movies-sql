@@ -1,0 +1,56 @@
+-- ============================================================
+-- 00. SCHEMA / SETUP
+-- These queries run against the CLEANED dataset produced by the
+-- Python pipeline (data/processed/movies_cleaned.parquet), so the
+-- spam/junk rows are already gone.
+--
+-- Two ways to run every other .sql file in this folder:
+-- ============================================================
+
+-- ---------- Option A: DuckDB (no server, reads the parquet directly) --------
+-- Run once, then every file below can use `FROM movies`:
+--   duckdb
+--   .read sql/00_schema.sql
+CREATE OR REPLACE VIEW movies AS
+SELECT * FROM 'data/processed/movies_cleaned.parquet';
+
+
+-- ---------- Option B: PostgreSQL ------------------------------------------
+-- Create the table, then load the cleaned data. Column types match the
+-- cleaned parquet (derived columns like profit/roi are included).
+--
+-- CREATE TABLE movies (
+--     id                    BIGINT PRIMARY KEY,
+--     title                 TEXT,
+--     original_title        TEXT,
+--     status                TEXT,
+--     release_date          DATE,
+--     release_year          INT,
+--     release_decade        INT,
+--     release_month         INT,
+--     revenue               DOUBLE PRECISION,
+--     budget                DOUBLE PRECISION,
+--     runtime               DOUBLE PRECISION,
+--     vote_average          DOUBLE PRECISION,
+--     vote_count            BIGINT,
+--     popularity            DOUBLE PRECISION,
+--     adult                 BOOLEAN,
+--     original_language     TEXT,
+--     genres                TEXT,
+--     primary_genre         TEXT,
+--     production_countries  TEXT,
+--     spoken_languages      TEXT,
+--     keywords              TEXT,
+--     overview              TEXT,
+--     profit                DOUBLE PRECISION,
+--     roi                   DOUBLE PRECISION,
+--     profit_pct            DOUBLE PRECISION,
+--     has_financials        BOOLEAN
+-- );
+--
+-- Load the cleaned data (export it to CSV first, or use DuckDB's postgres
+-- extension). Simplest route via DuckDB:
+--   duckdb -c "COPY (SELECT * FROM 'data/processed/movies_cleaned.parquet')
+--              TO 'movies_cleaned.csv' (HEADER, DELIMITER ',');"
+-- then in psql:
+--   \COPY movies FROM 'movies_cleaned.csv' CSV HEADER;
