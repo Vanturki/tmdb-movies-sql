@@ -23,7 +23,8 @@ cleaning:
   max_revenue: 3000000000        # 3B cap: no real film has grossed above ~2.92B (Avatar)
   max_budget: 3000000000
   max_runtime: 1000              # minutes; above this is a data error
-  min_title_length: 2            # عناوين أقصر من هذا (بعد trim) تُعتبر غير صالحة وتُسقط
+  min_title_length: 2            # عناوين أقصر من هذا تُعتبر غير صالحة...
+  short_title_min_votes: 50      # ...إلا إذا بلغت هذا العدد من الأصوات (أفلام حقيقية مثل M و Z و 9)
   spam_patterns:                 # case-insensitive regex fragments that mark junk titles
     - "unsubscribe"
     - "https?://"

@@ -62,7 +62,8 @@ def build_clean_query(cfg: dict, source: str = "raw") -> str:
         FROM typed
         WHERE id IS NOT NULL
           AND title IS NOT NULL AND title <> ''
-          AND length(title) >= {c['min_title_length']}
+          AND (length(title) >= {c['min_title_length']}
+               OR vote_count >= {c['short_title_min_votes']})
           AND NOT regexp_matches(lower(title), '{spam}')
           AND release_date IS NOT NULL
           AND EXTRACT(year FROM release_date) BETWEEN {c['min_year']} AND {c['max_year']}
