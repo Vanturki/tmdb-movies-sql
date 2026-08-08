@@ -80,6 +80,21 @@ def test_derived_columns(con, cfg):
     assert year == 2005
 
 
+def test_short_titles_removed(con, cfg):
+    # عناوين أقل من min_title_length (بعد trim) يجب أن تُسقط، وعنوان بطول الحدّ الأدنى يبقى.
+    con.execute(
+        "INSERT INTO raw (id, title, release_date, revenue, budget, vote_average, vote_count) "
+        "VALUES "
+        "('10', 'A', '2015-01-01', '0', '0', '6', '5'),"          # حرف واحد -> يُسقط
+        "('11', '   ', '2015-01-01', '0', '0', '6', '5'),"        # فراغات فقط -> يُسقط
+        "('12', NULL, '2015-01-01', '0', '0', '6', '5'),"         # NULL -> يُسقط
+        "('13', 'Ok', '2015-01-01', '0', '0', '6', '5')"          # حرفان (حالة الحدّ) -> يبقى
+    )
+    clean_in_connection(con, cfg)
+    ids = {r[0] for r in con.execute("SELECT id FROM clean WHERE id IN (10, 11, 12, 13)").fetchall()}
+    assert ids == {13}
+
+
 def test_zero_financials_give_null_ratios(con, cfg):
     # A row with revenue=0/budget=0 should survive but have null profit/roi.
     con.execute(
