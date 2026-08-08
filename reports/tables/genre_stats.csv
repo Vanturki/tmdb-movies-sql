@@ -1,20 +1,20 @@
 genre,movie_count,avg_rating
-Drama,237215,6.64
-Documentary,178082,7.07
-Comedy,145391,6.31
-Animation,61590,6.93
-Romance,55570,6.53
-Horror,55131,5.79
-Music,52592,6.88
-Thriller,47377,6.16
-Action,45700,6.27
-Crime,34896,6.49
-Family,28923,6.54
+Drama,237121,6.64
+Documentary,178052,7.07
+Comedy,145373,6.31
+Animation,61566,6.93
+Romance,55558,6.53
+Horror,55104,5.79
+Music,52586,6.88
+Thriller,47348,6.16
+Action,45693,6.27
+Crime,34888,6.49
+Family,28916,6.54
 TV Movie,24919,6.36
-Adventure,24560,6.42
-Fantasy,24492,6.49
-Science Fiction,21957,6.08
-Mystery,21147,6.36
-History,17322,6.87
-War,10949,6.81
-Western,9010,6.5
+Adventure,24558,6.42
+Fantasy,24484,6.49
+Science Fiction,21950,6.08
+Mystery,21130,6.36
+History,17318,6.87
+War,10946,6.81
+Western,9009,6.5
